@@ -13,48 +13,62 @@
 </header>
 <!-- Filter Section -->
 <section class="py-3 filter-bar">
-    <div class="container">
+    <div class="container ">
         <div class="row" style="background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;">
             <div class="col-12">
                 <form>
                     <div class="row">
                         <!-- Product Name -->
                         <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="Product Name" name="ProductName">
+                            <input type="text" class="form-control" placeholder="Product Name" name="ProductName" value="@ViewBag.ProductName">
                         </div>
 
                         <!-- Price Range -->
                         <div class="col-md-2">
-                            <input type="number" class="form-control" placeholder="Min Price" name="MinPrice">
+                            <input type="number" class="form-control" placeholder="Min Price" name="MinPrice" value="@ViewBag.MinPrice">
                         </div>
                         <div class="col-md-2">
-                            <input type="number" class="form-control" placeholder="Max Price" name="MaxPrice">
+                            <input type="number" class="form-control" placeholder="Max Price" name="MaxPrice" value="@ViewBag.MaxPrice">
                         </div>
 
                         <!-- Category -->
                         <div class="col-md-2">
-                            <select class="form-control" name="CategoryId">
+                            <select name="CategoryId" class="form-control">
                                 <option>--Select Category--</option>
                                 @foreach (var item in ViewBag.Categories)
                                 {
-                                    <option value="@item.Id">@item.Name</option>
+                                    @if (item.Id == ViewBag.CategoryId)
+                                    {
+                                        <option value="@item.Id" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
                                 }
                             </select>
                         </div>
                         <!-- Brand -->
                         <div class="col-md-2">
-                            <select class="form-control" name="BrandId">
+                            <select name="BrandId" class="form-control">
                                 <option>--Select Brand--</option>
                                 @foreach (var item in ViewBag.Brands)
                                 {
-                                    <option value="@item.Id">@item.Name</option>
+                                    @if (item.Id == ViewBag.BrandId)
+                                    {
+                                        <option value="@item.Id" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
                                 }
                             </select>
                         </div>
                         <!-- Hot Product Checkbox -->
                         <div class="col-md-1">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" name="IsHot" value="True">
+                                <input type="checkbox" class="form-check-input" name="IsHot" value="True" @(ViewBag.IsHot != null && ViewBag.IsHot ? "checked" : "")>
                                 <label class="form-check-label">Hot</label>
                             </div>
                         </div>

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce531.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260724155315_AddDataInCategoryModel")]
-    partial class AddDataInCategoryModel
+    [Migration("20260724182151_add_data_in_brand_model")]
+    partial class add_data_in_brand_model
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,8 +87,8 @@ namespace Ecommerce531.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Discount")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("MainImg")
                         .IsRequired()

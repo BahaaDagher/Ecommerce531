@@ -5,7 +5,7 @@
 namespace Ecommerce531.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDataInProdcutModel : Migration
+    public partial class add_data_in_product_model : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

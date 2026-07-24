@@ -13,31 +13,42 @@ namespace Ecommerce531.Controllers
         public IActionResult Index(ProcutFilterVM filter)
         {
             var products = _context.Products.AsQueryable();
-            products = products.Include(p => p.Category); 
+            products = products.Include(p => p.Category);
             // filter 
-            if(filter.ProductName != null )
+            if(filter.ProductName != null)
             {
-                products = products.Where(p=>p.Name.Contains(filter.ProductName)); 
+                products = products.Where(p => p.Name.Contains(filter.ProductName));
+                ViewBag.ProductName = filter.ProductName;
             }
-            if (filter.MinPrice >0 )
+            if (filter.MinPrice > 0)
             {
-                products = products.Where(p => p.Price >= filter.MinPrice);
+                products = products.Where(p => p.Price - (p.Price * p.Discount / 100) >= filter.MinPrice);
+                ViewBag.MinPrice = filter.MinPrice;
+
             }
             if (filter.MaxPrice > 0)
             {
-                products = products.Where(p => p.Price <= filter.MaxPrice);
+                products = products.Where(p => p.Price - (p.Price * p.Discount / 100) >= filter.MaxPrice);
+                ViewBag.MaxPrice = filter.MaxPrice;
+
             }
             if (filter.CategoryId > 0)
             {
                 products = products.Where(p => p.CategoryId == filter.CategoryId);
+                ViewBag.CategoryId = filter.CategoryId;
+
             }
             if (filter.BrandId > 0)
             {
                 products = products.Where(p => p.BrandId == filter.BrandId);
+                ViewBag.BrandId = filter.BrandId;
+
             }
-            if(filter.IsHot)
+            if (filter.IsHot)
             {
-                products = products.Where(p => p.Discount > 40);
+                products = products.Where(p => p.Discount >= 50);
+                ViewBag.IsHot = filter.IsHot;
+
             }
             // pagination 
             ViewBag.Categories = _context.Categories; 
