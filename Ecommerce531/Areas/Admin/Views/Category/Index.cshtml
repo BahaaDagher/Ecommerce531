@@ -8,6 +8,10 @@
             <a href="/Admin/Category/Create" class="btn btn-success">Create</a>
         </div>
     </div>
+    <div>
+        @* @Context.Request.Cookies["Successful_Notification"] *@
+         
+    </div>
 
     <div class="row">
         <div class="col-12">
@@ -56,7 +60,14 @@
         </div>
     </div>
 </div>
-
+@section Scripts {
+    @if (TempData["Successful_Notification"] != null)
+    {
+        <script>
+            toastr.success('@TempData["Successful_Notification"]')
+        </script>
+    }
+}
 
 <script>
     document.querySelectorAll(".btn-delete").forEach(button => {
